@@ -14,7 +14,7 @@ class LogSettings(BaseSettings):
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_nested_delimiter='_')
+    model_config = SettingsConfigDict(env_nested_delimiter='__')
     bot: BotSettings
     log: LogSettings = LogSettings()
 
