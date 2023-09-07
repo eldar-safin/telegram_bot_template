@@ -4,7 +4,9 @@ from loguru import logger
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
 from .core.settings import settings
-from .core.handlers.basic import start_handler
+from .core.handlers import basic as basic_handlers
+from .core.handlers import password_generator as password_generator_handlers
+from .core.handlers import catalog as catalog_handlers
 
 
 async def on_bot_startup(bot: Bot):
@@ -25,7 +27,10 @@ async def start():
     dispatcher = Dispatcher(storage=MemoryStorage())
     dispatcher.startup.register(on_bot_startup)
     dispatcher.shutdown.register(on_bot_shutdown)
-    dispatcher.message.register(start_handler)
+
+    password_generator_handlers.setup(dispatcher)
+    catalog_handlers.setup(dispatcher)
+    basic_handlers.setup(dispatcher)
 
     try:
         await dispatcher.start_polling(bot)
