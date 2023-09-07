@@ -21,7 +21,7 @@ async def on_bot_shutdown(bot: Bot):
 
 async def start():
     logger.debug('start()')
-    bot = Bot(token=settings.bot.token, parse_mode=ParseMode.HTML)
+    bot = Bot(token=settings.bot.token.get_secret_value(), parse_mode=ParseMode.HTML)
     dispatcher = Dispatcher(storage=MemoryStorage())
     dispatcher.startup.register(on_bot_startup)
     dispatcher.shutdown.register(on_bot_shutdown)

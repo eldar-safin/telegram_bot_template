@@ -5,7 +5,7 @@ from loguru import logger
 
 
 class BotSettings(BaseSettings):
-    token: str
+    token: SecretStr
     admin_id: Optional[int] = None
 
 
